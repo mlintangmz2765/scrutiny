@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+/*
+ * Scrutiny design tokens — the single source of visual truth (docs/DESIGN.md).
+ * Never hardcode colors, shadows, or radii in components; use these tokens
+ * through the Tailwind utilities they generate (bg-surface, text-ink, …).
+ */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Surfaces */
+  --color-canvas: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-sunken: #eceef1;
+  --color-border: #d8dce2;
+  --color-border-strong: #b6bdc7;
+
+  /* Text */
+  --color-ink: #16212e;
+  --color-ink-muted: #5b6878;
+  --color-ink-faint: #8b97a5;
+
+  /* Brand */
+  --color-primary: #15514a;
+  --color-primary-hover: #0f3f3a;
+  --color-primary-tint: #e3efed;
+  --color-accent: #b98a2f;
+  --color-accent-tint: #f6eed9;
+
+  /* Status */
+  --color-danger: #b3382e;
+  --color-danger-tint: #f9e9e7;
+  --color-warning: #9a6b1f;
+  --color-warning-tint: #f8f0dd;
+  --color-success: #2e7d4f;
+  --color-success-tint: #e5f2ea;
+  --color-info: #2f5e9e;
+  --color-info-tint: #e7eef8;
+
+  /* Elevation & shape */
+  --shadow-card: 0 1px 2px rgb(22 33 46 / 0.06);
+  --shadow-pop: 0 4px 16px rgb(22 33 46 / 0.14);
+  --radius-control: 6px;
+  --radius-card: 10px;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-size: 0.875rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Tabular figures for every monetary/numeric cell (docs/DESIGN.md §3). */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
