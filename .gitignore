@@ -6,7 +6,8 @@ dist/
 *.tsbuildinfo
 
 # Runtime data
-data/
+data/*
+!data/.gitkeep
 *.db
 *.db-journal
 
