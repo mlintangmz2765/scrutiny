@@ -16,7 +16,7 @@ recorded decision in `docs/DECISIONS.md` (create if missing, one dated entry per
 | ORM | Prisma 6 | |
 | Database | SQLite (file `./data/scrutiny.db`) | Single-firm deployment; no Postgres in v1 |
 | Validation | Zod | All API inputs and parsed files validated with Zod |
-| Frontend | React 19 + Vite 7 | SPA |
+| Frontend | React 19 + Vite 6 | SPA. Vite 7 needs Node ≥ 20.19 — see DECISIONS.md |
 | Routing (web) | React Router | |
 | Server state (web) | TanStack Query | |
 | Styling | Tailwind CSS 4 (`@tailwindcss/vite`) | Plain Tailwind; small shared UI components in `apps/web/src/components/ui/` |
@@ -84,7 +84,7 @@ its schemas in `packages/shared/src/schemas/trial-balance.ts`; pure math in
     "dev": "pnpm -r --parallel dev",          // server on :3001, web on :5173
     "build": "pnpm -r build",
     "test": "pnpm -r test",
-    "lint": "pnpm -r lint",
+    "lint": "eslint . --max-warnings 0",      // single flat config at repo root
     "typecheck": "pnpm -r typecheck",
     "db:migrate": "pnpm -C apps/server prisma migrate dev",
     "db:seed": "pnpm -C apps/server prisma db seed"

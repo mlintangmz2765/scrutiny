@@ -28,7 +28,7 @@ Think "well-typeset financial report", not "marketing site".
 | `--color-primary` | `#15514a` | Brand: deep pine green. Buttons, active nav, links |
 | `--color-primary-hover` | `#0f3f3a` | |
 | `--color-primary-tint` | `#e3efed` | Selected rows, active nav bg |
-| `--color-accent` | `#b98a2f` | Sparingly: sign-off gold, highlights |
+| `--color-accent` | `#b98a2f` / tint `#f6eed9` | Sparingly: sign-off gold, highlights |
 | `--color-danger` | `#b3382e` / tint `#f9e9e7` | Errors, negative amounts |
 | `--color-warning` | `#9a6b1f` / tint `#f8f0dd` | Warnings, NEAR_MATERIALITY |
 | `--color-success` | `#2e7d4f` / tint `#e5f2ea` | Pass states, balanced badges |

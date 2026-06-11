@@ -7,13 +7,13 @@ A task may only start when every prerequisite task is `✅ done`.
 
 | Task | Title | Prereqs | Status | Done date |
 |---|---|---|---|---|
-| T-00.1 | Repo scaffolding & tooling | — | ⬜ todo | |
-| T-00.2 | packages/shared scaffold | T-00.1 | ⬜ todo | |
-| T-00.3 | apps/server scaffold | T-00.2 | ⬜ todo | |
-| T-00.4 | apps/web scaffold | T-00.3 | ⬜ todo | |
-| T-00.5 | Prisma + SQLite | T-00.3 | ⬜ todo | |
-| T-00.6 | CI (GitHub Actions) | T-00.5 | ⬜ todo | |
-| T-00.7 | README, LICENSE, CONTRIBUTING | T-00.1 | ⬜ todo | |
+| T-00.1 | Repo scaffolding & tooling | — | ✅ done | 2026-06-12 |
+| T-00.2 | packages/shared scaffold | T-00.1 | ✅ done | 2026-06-12 |
+| T-00.3 | apps/server scaffold | T-00.2 | ✅ done | 2026-06-12 |
+| T-00.4 | apps/web scaffold | T-00.3 | ✅ done | 2026-06-12 |
+| T-00.5 | Prisma + SQLite | T-00.3 | ✅ done | 2026-06-12 |
+| T-00.6 | CI (GitHub Actions) | T-00.5 | ✅ done | 2026-06-12 |
+| T-00.7 | README, LICENSE, CONTRIBUTING | T-00.1 | ✅ done | 2026-06-12 |
 | T-01.1 | User service & seed | T-00.5 | ⬜ todo | |
 | T-01.2 | Auth plugin & endpoints | T-01.1 | ⬜ todo | |
 | T-01.3 | Web: login + app shell | T-01.2 | ⬜ todo | |
