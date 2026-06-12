@@ -1,8 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import { Building2, FolderOpen, LayoutDashboard, Palette, ShieldCheck } from 'lucide-react';
+import { Building2, FolderOpen, LayoutDashboard, LogOut, Palette, ShieldCheck } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { apiFetch } from '../lib/api';
+import { useAuth } from '../lib/auth';
 import { cn } from '../lib/cn';
+
+function initialsOf(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
+}
 
 const primaryNav = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -32,6 +42,38 @@ function ApiStatus() {
       />
       {isSuccess ? 'API: ok' : 'API: offline'}
     </span>
+  );
+}
+
+function UserBlock() {
+  const user = useAuth();
+
+  async function handleLogout() {
+    await apiFetch('/auth/logout', { method: 'POST' });
+    window.location.href = '/login';
+  }
+
+  return (
+    <div className="mt-2 flex items-center gap-2.5 px-3 py-2">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-tint text-xs font-semibold text-primary">
+        {initialsOf(user.name)}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-[13px] leading-tight font-medium text-ink">
+          {user.name}
+        </span>
+        <span className="block text-xs text-ink-faint capitalize">{user.role.toLowerCase()}</span>
+      </span>
+      <button
+        type="button"
+        onClick={handleLogout}
+        aria-label="Log out"
+        title="Log out"
+        className="rounded-control p-1.5 text-ink-muted hover:bg-sunken hover:text-ink"
+      >
+        <LogOut className="h-4 w-4" aria-hidden />
+      </button>
+    </div>
   );
 }
 
@@ -68,17 +110,7 @@ export function AppShell() {
             <Palette className="h-4 w-4" aria-hidden />
             Design system
           </NavLink>
-          <div className="mt-2 flex items-center gap-2.5 px-3 py-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sunken text-xs font-semibold text-ink-muted">
-              ?
-            </span>
-            <span>
-              <span className="block text-[13px] leading-tight font-medium text-ink">
-                Not signed in
-              </span>
-              <span className="block text-xs text-ink-faint">Sign-in arrives with Phase 1</span>
-            </span>
-          </div>
+          <UserBlock />
         </div>
       </aside>
 

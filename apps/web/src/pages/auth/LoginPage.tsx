@@ -1,9 +1,13 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { ShieldCheck } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Card, CardBody, Field, Input } from '../../components/ui';
 import { ApiError, apiFetch } from '../../lib/api';
 
 export function LoginPage() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -18,11 +22,10 @@ export function LoginPage() {
         method: 'POST',
         body: JSON.stringify({ email, password }),
       });
-      window.location.href = '/';
+      await queryClient.invalidateQueries({ queryKey: ['me'] });
+      navigate('/', { replace: true });
     } catch (err) {
-      if (err instanceof ApiError && err.status === 404) {
-        setError('The authentication API is not built yet — it arrives with Phase 1 (T-01.2).');
-      } else if (err instanceof ApiError) {
+      if (err instanceof ApiError) {
         setError(err.message);
       } else {
         setError('Could not reach the API server. Is it running on port 3001?');
