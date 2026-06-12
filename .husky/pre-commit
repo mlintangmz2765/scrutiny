@@ -1,0 +1,1 @@
+node scripts/guard/run.mjs pre-commit

@@ -48,6 +48,18 @@ pnpm db:seed            # seed admin + FSLI taxonomy + demo data
 - Blocked? Write `docs/BLOCKERS.md` (task id, attempts, exact error) and move to the next
   unblocked task. Never edit plan files to make a failing task "pass".
 
+## Guardrails (machine-enforced — do not fight them)
+
+Husky hooks + CI + a Claude Code PreToolUse hook enforce the protocol (PLAN.md §3.3):
+plan/guard files are checksummed in `docs/.guard/plan-manifest.json` and rejected on
+drift; commit messages are format-checked; the task graph in PROGRESS.md is validated
+(no task `done` before its prereqs); `@ts-ignore`/`eslint-disable`/skipped tests are
+rejected; `--no-verify`, `HUSKY=0`, `core.hooksPath`, and force-push are blocked.
+If the guard blocks you, the correct move is ALWAYS: fix the cause, or write
+`docs/BLOCKERS.md` and take the next task — never weaken or bypass the guard.
+Human-approved plan changes only: `node scripts/guard/update-plan-manifest.mjs` +
+`[plan-change]` in the commit message.
+
 ## UI foundation
 
 Design tokens, layout primitives, and reusable components live in

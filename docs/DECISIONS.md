@@ -2,6 +2,15 @@
 
 Dated deviations from ARCHITECTURE.md / phase files, per PLAN.md §3. Newest first.
 
+## 2026-06-12 — Machine-enforced guardrails (PLAN.md §3.3)
+
+Added `scripts/guard/` + husky hooks + CI step + Claude Code PreToolUse hook after the
+owner observed agents ignoring MD instructions. Plan/guard files are checksummed in
+`docs/.guard/plan-manifest.json`; commits touching them require the `[plan-change]`
+marker; PROGRESS.md is validated against the manifest task graph; forbidden patterns
+and hook-bypass commands are rejected. `GET /api/users` was earlier widened to MANAGER+
+(member pickers) — recorded here for completeness.
+
 ## 2026-06-12 — Vite 6 instead of Vite 7; Node engines >=20.16
 
 Vite 7 requires Node ≥ 20.19 / ≥ 22.12; the local development machine runs Node 20.16.

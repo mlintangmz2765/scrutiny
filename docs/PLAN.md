@@ -102,7 +102,30 @@ This plan is executed by AI agents. The rules below are mandatory.
   Numbers in DOMAIN.md (Benford frequencies, MUS factors, materiality math) must be
   asserted exactly in tests.
 
-### 3.3 Definition of done (every task)
+### 3.3 Enforcement — these rules are machine-checked, not advisory
+
+A guard layer rejects protocol violations outright:
+
+- **Git hooks (husky)**: `pre-commit` runs the staged-file guard + lint; `commit-msg`
+  enforces the commit format and the `[plan-change]` marker; `pre-push` runs the full
+  gate (guard, typecheck, test, build). CI re-runs the guard (`pnpm guard`).
+- **Protected files** — CLAUDE.md, docs/PLAN.md, DOMAIN.md, ARCHITECTURE.md, DESIGN.md,
+  docs/phases/**, and the guard itself (scripts/guard/**, .husky/**,
+  .claude/settings.json, .github/workflows/ci.yml) — are checksummed in
+  `docs/.guard/plan-manifest.json`. Any drift fails pre-commit, pre-push, and CI.
+  Intentional, human-approved plan changes: run
+  `node scripts/guard/update-plan-manifest.mjs` and include `[plan-change]` in the
+  commit message.
+- **Task graph**: PROGRESS.md must contain exactly the manifest's tasks with identical
+  prerequisites, and a task may only be `✅ done` when all its prerequisites are.
+- **Forbidden patterns**: `@ts-ignore`/`@ts-expect-error`, `eslint-disable`, and
+  focused/skipped tests are rejected at commit time and in CI.
+- **Agent harness**: a Claude Code PreToolUse hook (`.claude/settings.json`) blocks
+  edits to protected files and shell commands that bypass hooks (`--no-verify`,
+  `HUSKY=0`, `core.hooksPath`, force-push).
+- Disabling or weakening the guard is itself a protocol violation.
+
+### 3.4 Definition of done (every task)
 
 - All acceptance checks in the task pass.
 - `pnpm lint && pnpm typecheck && pnpm test && pnpm build` pass from repo root.
