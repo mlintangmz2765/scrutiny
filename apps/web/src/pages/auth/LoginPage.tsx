@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { ShieldCheck } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LogoMark } from '../../components/Logo';
 import { Button, Card, CardBody, Field, Input } from '../../components/ui';
 import { ApiError, apiFetch } from '../../lib/api';
 
@@ -39,9 +39,7 @@ export function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-canvas p-4">
       <div className="w-full max-w-sm">
         <div className="mb-6 flex flex-col items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-card bg-primary">
-            <ShieldCheck className="h-7 w-7 text-white" aria-hidden />
-          </span>
+          <LogoMark className="h-12 w-12" />
           <div className="text-center">
             <h1 className="text-[28px] leading-tight font-semibold text-ink">Scrutiny</h1>
             <p className="text-[13px] text-ink-muted">Open-source audit platform</p>

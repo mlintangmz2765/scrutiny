@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { Building2, FolderOpen, LayoutDashboard, LogOut, Palette, ShieldCheck } from 'lucide-react';
+import { Building2, FolderOpen, LayoutDashboard, LogOut, Palette } from 'lucide-react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { apiFetch } from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { cn } from '../lib/cn';
+import { LogoMark } from './Logo';
 
 function initialsOf(name: string): string {
   return name
@@ -82,9 +83,7 @@ export function AppShell() {
     <div className="flex min-h-screen">
       <aside className="fixed inset-y-0 left-0 flex w-[248px] flex-col border-r border-border bg-surface">
         <div className="flex items-center gap-2.5 px-4 py-4">
-          <span className="flex h-9 w-9 items-center justify-center rounded-control bg-primary">
-            <ShieldCheck className="h-5 w-5 text-white" aria-hidden />
-          </span>
+          <LogoMark />
           <span>
             <span className="block text-base leading-tight font-semibold text-ink">Scrutiny</span>
             <span className="block text-xs text-ink-muted">Audit platform</span>

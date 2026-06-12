@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Scrutiny">
+  <!-- Scrutiny mark for light backgrounds (transparent) -->
+  <circle cx="26" cy="26" r="15" fill="none" stroke="#15514a" stroke-width="6"/>
+  <line x1="40" y1="40" x2="54" y2="54" stroke="#b98a2f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M18.5 26.5l5.5 5.5 10-11" fill="none" stroke="#15514a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
