@@ -7,5 +7,9 @@ export default defineConfig({
     // createTestApp pushes the Prisma schema to a temp SQLite db on first use.
     testTimeout: 30000,
     hookTimeout: 30000,
+    env: {
+      // Low bcrypt cost for fast tests only — production default is 12.
+      BCRYPT_COST: '4',
+    },
   },
 });

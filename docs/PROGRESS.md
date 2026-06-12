@@ -14,7 +14,7 @@ A task may only start when every prerequisite task is `✅ done`.
 | T-00.5 | Prisma + SQLite | T-00.3 | ✅ done | 2026-06-12 |
 | T-00.6 | CI (GitHub Actions) | T-00.5 | ✅ done | 2026-06-12 |
 | T-00.7 | README, LICENSE, CONTRIBUTING | T-00.1 | ✅ done | 2026-06-12 |
-| T-01.1 | User service & seed | T-00.5 | ⬜ todo | |
+| T-01.1 | User service & seed | T-00.5 | ✅ done | 2026-06-12 |
 | T-01.2 | Auth plugin & endpoints | T-01.1 | ⬜ todo | |
 | T-01.3 | Web: login + app shell | T-01.2 | ⬜ todo | |
 | T-01.4 | Clients API | T-01.2 | ⬜ todo | |

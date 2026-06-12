@@ -15,6 +15,7 @@ model User {
   // ADMIN | PARTNER | MANAGER | STAFF — SQLite has no enums; validated by
   // userRoleSchema in @scrutiny/shared (see docs/DECISIONS.md).
   role         String
+  isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
