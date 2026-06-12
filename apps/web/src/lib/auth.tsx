@@ -7,6 +7,17 @@ import { apiFetch } from './api';
 
 const AuthContext = createContext<UserPublic | null>(null);
 
+/** Test-only convenience: provide a user without hitting /auth/me. */
+export function AuthProvider({
+  user,
+  children,
+}: {
+  user: UserPublic;
+  children: React.ReactNode;
+}) {
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+}
+
 /** Current user — only usable inside the RequireAuth tree. */
 export function useAuth(): UserPublic {
   const user = useContext(AuthContext);

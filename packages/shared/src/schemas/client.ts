@@ -22,3 +22,17 @@ export const clientListQuerySchema = paginationQuerySchema.extend({
   search: z.string().optional(),
 });
 export type ClientListQuery = z.infer<typeof clientListQuerySchema>;
+
+/** Shape of a client as returned by the API. */
+export interface ClientRecord {
+  id: string;
+  name: string;
+  registrationNumber: string | null;
+  industry: string | null;
+  contactName: string | null;
+  contactEmail: string | null;
+  notes: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
