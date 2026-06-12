@@ -9,6 +9,8 @@ import {
   type UserUpdateInput,
 } from '@scrutiny/shared';
 import { AppError } from '../../lib/app-error.js';
+import type { AuthTokenPayload } from '../../plugins/auth.js';
+import { computeChanges, recordAudit } from '../audit-log/service.js';
 
 // Production cost is 12 (T-01.1). Tests lower it via env to keep suites fast;
 // never set BCRYPT_COST in a deployment.
@@ -25,7 +27,11 @@ export function toPublicUser(user: User): UserPublic {
   };
 }
 
-export async function createUser(prisma: PrismaClient, input: UserCreateInput): Promise<UserPublic> {
+export async function createUser(
+  prisma: PrismaClient,
+  input: UserCreateInput,
+  actor?: AuthTokenPayload,
+): Promise<UserPublic> {
   const data = userCreateSchema.parse(input);
   const existing = await prisma.user.findUnique({ where: { email: data.email } });
   if (existing) throw new AppError('EMAIL_TAKEN', 409, 'A user with this email already exists.');
@@ -34,6 +40,14 @@ export async function createUser(prisma: PrismaClient, input: UserCreateInput): 
   const user = await prisma.user.create({
     data: { email: data.email, name: data.name, role: data.role, passwordHash },
   });
+  if (actor) {
+    await recordAudit(prisma, {
+      userId: actor.id,
+      action: 'CREATE',
+      entityType: 'User',
+      entityId: user.id,
+    });
+  }
   return toPublicUser(user);
 }
 
@@ -74,6 +88,7 @@ export async function updateUser(
   prisma: PrismaClient,
   id: string,
   input: UserUpdateInput,
+  actor?: AuthTokenPayload,
 ): Promise<UserPublic> {
   const data = userUpdateSchema.parse(input);
   const user = await prisma.user.findUnique({ where: { id } });
@@ -85,10 +100,30 @@ export async function updateUser(
     where: { id },
     data: { ...rest, ...(passwordHash ? { passwordHash } : {}) },
   });
+  if (actor) {
+    const changes = computeChanges(
+      user as unknown as Record<string, unknown>,
+      updated as unknown as Record<string, unknown>,
+      ['name', 'role', 'isActive'],
+    );
+    // Never log password material — only the fact that it changed.
+    if (password) changes.password = ['***', '***'];
+    await recordAudit(prisma, {
+      userId: actor.id,
+      action: 'UPDATE',
+      entityType: 'User',
+      entityId: id,
+      changes,
+    });
+  }
   return toPublicUser(updated);
 }
 
 /** Users are never hard-deleted (T-01.1) — deactivation blocks login. */
-export async function deactivateUser(prisma: PrismaClient, id: string): Promise<UserPublic> {
-  return updateUser(prisma, id, { isActive: false });
+export async function deactivateUser(
+  prisma: PrismaClient,
+  id: string,
+  actor?: AuthTokenPayload,
+): Promise<UserPublic> {
+  return updateUser(prisma, id, { isActive: false }, actor);
 }

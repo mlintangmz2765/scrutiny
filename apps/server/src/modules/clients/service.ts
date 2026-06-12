@@ -3,6 +3,17 @@ import type { ClientCreateInput, ClientListQuery, ClientUpdateInput } from '@scr
 import { AppError } from '../../lib/app-error.js';
 import { MANAGER_AND_UP, requireRole } from '../../lib/authz.js';
 import type { AuthTokenPayload } from '../../plugins/auth.js';
+import { computeChanges, recordAudit } from '../audit-log/service.js';
+
+const AUDITED_CLIENT_FIELDS = [
+  'name',
+  'registrationNumber',
+  'industry',
+  'contactName',
+  'contactEmail',
+  'notes',
+  'isActive',
+];
 
 export async function listClients(
   prisma: PrismaClient,
@@ -34,7 +45,14 @@ export async function createClient(
   input: ClientCreateInput,
 ): Promise<Client> {
   requireRole(user, MANAGER_AND_UP);
-  return prisma.client.create({ data: input });
+  const created = await prisma.client.create({ data: input });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'CREATE',
+    entityType: 'Client',
+    entityId: created.id,
+  });
+  return created;
 }
 
 export async function updateClient(
@@ -48,8 +66,20 @@ export async function updateClient(
     // Activation state is an ADMIN concern (T-01.4).
     requireRole(user, ['ADMIN']);
   }
-  await getClient(prisma, id);
-  return prisma.client.update({ where: { id }, data: input });
+  const before = await getClient(prisma, id);
+  const updated = await prisma.client.update({ where: { id }, data: input });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'UPDATE',
+    entityType: 'Client',
+    entityId: id,
+    changes: computeChanges(
+      before as unknown as Record<string, unknown>,
+      updated as unknown as Record<string, unknown>,
+      AUDITED_CLIENT_FIELDS,
+    ),
+  });
+  return updated;
 }
 
 /** Clients are never hard-deleted; ADMIN deactivates them. */
@@ -61,4 +91,10 @@ export async function deactivateClient(
   requireRole(user, ['ADMIN']);
   await getClient(prisma, id);
   await prisma.client.update({ where: { id }, data: { isActive: false } });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'DELETE',
+    entityType: 'Client',
+    entityId: id,
+  });
 }

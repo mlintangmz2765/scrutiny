@@ -7,6 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Append-only — there is deliberately no update/delete path for audit rows.
+model AuditLog {
+  id           String   @id @default(cuid())
+  userId       String?
+  action       String // CREATE | UPDATE | DELETE | STATUS | LOGIN | LOGIN_FAILED
+  entityType   String
+  entityId     String
+  engagementId String?
+  changes      String? // JSON: { field: [old, new] }
+  createdAt    DateTime @default(now())
+
+  @@index([engagementId, createdAt])
+  @@index([createdAt])
+}
+
 model Client {
   id                 String   @id @default(cuid())
   name               String

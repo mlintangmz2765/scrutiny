@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     include: ['src/**/*.test.ts'],
     environment: 'node',
+    globalSetup: './src/test/global-setup.ts',
     // createTestApp pushes the Prisma schema to a temp SQLite db on first use.
     testTimeout: 30000,
     hookTimeout: 30000,

@@ -12,6 +12,7 @@ import { AppError } from '../../lib/app-error.js';
 import { MANAGER_AND_UP, requireRole } from '../../lib/authz.js';
 import { archivedGuard, requireEngagementAccess } from '../../lib/engagement-access.js';
 import type { AuthTokenPayload } from '../../plugins/auth.js';
+import { computeChanges, recordAudit } from '../audit-log/service.js';
 
 type EngagementWithExtras = Engagement & {
   client: { name: string };
@@ -69,6 +70,13 @@ export async function createEngagement(
       members: { create: { userId: user.id } },
     },
     include: includeExtras,
+  });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'CREATE',
+    entityType: 'Engagement',
+    entityId: created.id,
+    engagementId: created.id,
   });
   return toRecord(created);
 }
@@ -138,6 +146,30 @@ export async function updateEngagement(
     },
     include: includeExtras,
   });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'UPDATE',
+    entityType: 'Engagement',
+    entityId: id,
+    engagementId: id,
+    changes: computeChanges(
+      {
+        name: engagement.name,
+        periodStart: toDateOnly(engagement.periodStart),
+        periodEnd: toDateOnly(engagement.periodEnd),
+        currencyCode: engagement.currencyCode,
+        minorUnitsPerMajor: engagement.minorUnitsPerMajor,
+      },
+      {
+        name: updated.name,
+        periodStart: toDateOnly(updated.periodStart),
+        periodEnd: toDateOnly(updated.periodEnd),
+        currencyCode: updated.currencyCode,
+        minorUnitsPerMajor: updated.minorUnitsPerMajor,
+      },
+      ['name', 'periodStart', 'periodEnd', 'currencyCode', 'minorUnitsPerMajor'],
+    ),
+  });
   return toRecord(updated);
 }
 
@@ -179,6 +211,14 @@ export async function transitionStatus(
     where: { id },
     data: { status: target },
     include: includeExtras,
+  });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'STATUS',
+    entityType: 'Engagement',
+    entityId: id,
+    engagementId: id,
+    changes: { status: [engagement.status, target] },
   });
   return toRecord(updated);
 }
@@ -222,6 +262,13 @@ export async function addMember(
   if (existing) throw new AppError('ALREADY_MEMBER', 409, 'User is already a member.');
 
   await prisma.engagementMember.create({ data: { engagementId, userId } });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'CREATE',
+    entityType: 'EngagementMember',
+    entityId: userId,
+    engagementId,
+  });
   return listMembers(prisma, user, engagementId);
 }
 
@@ -240,4 +287,11 @@ export async function removeMember(
   });
   if (!existing) throw new AppError('NOT_FOUND', 404, 'Member not found.');
   await prisma.engagementMember.delete({ where: { id: existing.id } });
+  await recordAudit(prisma, {
+    userId: user.id,
+    action: 'DELETE',
+    entityType: 'EngagementMember',
+    entityId: userId,
+    engagementId,
+  });
 }

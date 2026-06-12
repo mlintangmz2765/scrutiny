@@ -1,4 +1,5 @@
 import Fastify, { type FastifyInstance } from 'fastify';
+import { auditLogRoutes } from './modules/audit-log/routes.js';
 import { authRoutes } from './modules/auth/routes.js';
 import { clientRoutes } from './modules/clients/routes.js';
 import { engagementRoutes } from './modules/engagements/routes.js';
@@ -26,6 +27,7 @@ export function buildApp(opts: BuildAppOptions = {}): FastifyInstance {
   app.register(userRoutes, { prefix: '/api' });
   app.register(clientRoutes, { prefix: '/api' });
   app.register(engagementRoutes, { prefix: '/api' });
+  app.register(auditLogRoutes, { prefix: '/api' });
 
   return app;
 }

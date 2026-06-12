@@ -18,13 +18,13 @@ export const userRoutes: FastifyPluginAsync = async (app) => {
 
   app.post('/users', async (req, reply) => {
     requireRole(req.user, ['ADMIN']);
-    const created = await createUser(app.prisma, userCreateSchema.parse(req.body));
+    const created = await createUser(app.prisma, userCreateSchema.parse(req.body), req.user);
     return reply.code(201).send(created);
   });
 
   app.patch('/users/:id', async (req) => {
     requireRole(req.user, ['ADMIN']);
     const { id } = req.params as { id: string };
-    return updateUser(app.prisma, id, userUpdateSchema.parse(req.body));
+    return updateUser(app.prisma, id, userUpdateSchema.parse(req.body), req.user);
   });
 };

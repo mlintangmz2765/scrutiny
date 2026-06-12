@@ -1,34 +1,17 @@
-import { execSync } from 'node:child_process';
 import { copyFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { inject } from 'vitest';
 import type { FastifyInstance } from 'fastify';
 import type { PrismaClient } from '@prisma/client';
 import type { UserPublic, UserRole } from '@scrutiny/shared';
 import { buildApp } from '../app.js';
 import { createUser } from '../modules/users/service.js';
 
-const serverRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
-
-let templateDbPath: string | null = null;
-
-/**
- * Pushes the Prisma schema into a template SQLite file once per test process;
- * every test app then gets a cheap file copy of it.
- */
+/** The schema-pushed template database created once in global-setup.ts. */
 function ensureTemplateDb(): string {
-  if (templateDbPath) return templateDbPath;
-  const dir = mkdtempSync(join(tmpdir(), 'scrutiny-template-'));
-  const dbPath = join(dir, 'template.db');
-  execSync('pnpm exec prisma db push --skip-generate', {
-    cwd: serverRoot,
-    env: { ...process.env, DATABASE_URL: toFileUrl(dbPath) },
-    stdio: 'ignore',
-  });
-  templateDbPath = dbPath;
-  return dbPath;
+  return inject('templateDb');
 }
 
 function toFileUrl(path: string): string {
