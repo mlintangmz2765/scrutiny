@@ -17,7 +17,7 @@ A task may only start when every prerequisite task is `✅ done`.
 | T-01.1 | User service & seed | T-00.5 | ✅ done | 2026-06-12 |
 | T-01.2 | Auth plugin & endpoints | T-01.1 | ✅ done | 2026-06-12 |
 | T-01.3 | Web: login + app shell | T-01.2 | ✅ done | 2026-06-12 |
-| T-01.4 | Clients API | T-01.2 | ⬜ todo | |
+| T-01.4 | Clients API | T-01.2 | ✅ done | 2026-06-12 |
 | T-01.5 | Clients UI | T-01.3, T-01.4 | ⬜ todo | |
 | T-01.6 | Engagements API | T-01.4 | ⬜ todo | |
 | T-01.7 | Engagements UI | T-01.5, T-01.6 | ⬜ todo | |
