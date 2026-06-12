@@ -1,6 +1,7 @@
 import Fastify, { type FastifyInstance } from 'fastify';
 import { authRoutes } from './modules/auth/routes.js';
 import { clientRoutes } from './modules/clients/routes.js';
+import { engagementRoutes } from './modules/engagements/routes.js';
 import { healthRoutes } from './modules/health/routes.js';
 import { userRoutes } from './modules/users/routes.js';
 import { authPlugin } from './plugins/auth.js';
@@ -24,6 +25,7 @@ export function buildApp(opts: BuildAppOptions = {}): FastifyInstance {
   app.register(authRoutes, { prefix: '/api' });
   app.register(userRoutes, { prefix: '/api' });
   app.register(clientRoutes, { prefix: '/api' });
+  app.register(engagementRoutes, { prefix: '/api' });
 
   return app;
 }

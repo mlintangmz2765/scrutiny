@@ -18,6 +18,37 @@ model Client {
   isActive           Boolean  @default(true)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+
+  engagements Engagement[]
+}
+
+model Engagement {
+  id                 String             @id @default(cuid())
+  clientId           String
+  client             Client             @relation(fields: [clientId], references: [id])
+  name               String
+  periodStart        DateTime
+  periodEnd          DateTime
+  currencyCode       String             @default("USD")
+  minorUnitsPerMajor Int                @default(100)
+  // PLANNING | FIELDWORK | REVIEW | COMPLETION | ARCHIVED (DOMAIN.md §1)
+  status             String             @default("PLANNING")
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  members            EngagementMember[]
+
+  @@index([clientId])
+}
+
+model EngagementMember {
+  id           String     @id @default(cuid())
+  engagementId String
+  engagement   Engagement @relation(fields: [engagementId], references: [id])
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  @@unique([engagementId, userId])
 }
 
 model User {
@@ -31,4 +62,6 @@ model User {
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  engagementMemberships EngagementMember[]
 }
