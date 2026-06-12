@@ -151,6 +151,9 @@ unless the task states otherwise.
 | 8 | [PHASE-08-misstatements-and-reporting.md](./phases/PHASE-08-misstatements-and-reporting.md) | SUM, Excel exports, draft financial statements, archive | 6, 7 |
 | 9 | [PHASE-09-packaging-and-rollforward.md](./phases/PHASE-09-packaging-and-rollforward.md) | Roll-forward, Docker, backups, E2E test, v1.0 release | 8 |
 
+After v1.0: the Big-4 parity roadmap (Phases 10–19) lives in [PLAN-V2.md](./PLAN-V2.md).
+It is a roadmap, not executable work — do not start it before v1.0 is tagged.
+
 ---
 
 ## 5. Feature parity map (why each phase exists)

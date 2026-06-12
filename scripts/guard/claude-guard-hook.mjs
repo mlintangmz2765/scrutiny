@@ -45,7 +45,7 @@ if (['Write', 'Edit', 'MultiEdit', 'NotebookEdit'].includes(tool)) {
   }
 }
 
-if (tool === 'Bash') {
+if (tool === 'Bash' || tool === 'PowerShell') {
   const command = String(input.command ?? '');
   const banned = [
     [/--no-verify\b/, 'git hooks must not be bypassed (--no-verify)'],

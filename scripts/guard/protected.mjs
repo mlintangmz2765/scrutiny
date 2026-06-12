@@ -11,6 +11,7 @@ export const MANIFEST_PATH = 'docs/.guard/plan-manifest.json';
 export const PROTECTED_FILES = [
   'CLAUDE.md',
   'docs/PLAN.md',
+  'docs/PLAN-V2.md',
   'docs/DOMAIN.md',
   'docs/ARCHITECTURE.md',
   'docs/DESIGN.md',

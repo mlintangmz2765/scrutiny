@@ -31,6 +31,7 @@ Playwright. Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | Doc | What's in it |
 |---|---|
 | [docs/PLAN.md](docs/PLAN.md) | Vision, scope, phase roadmap, execution model |
+| [docs/PLAN-V2.md](docs/PLAN-V2.md) | Post-v1.0 roadmap: Big-4 platform parity |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Stack, conventions, API/auth/money rules |
 | [docs/DOMAIN.md](docs/DOMAIN.md) | Audit domain reference — all formulas and defaults |
 | [docs/DESIGN.md](docs/DESIGN.md) | Design system |
