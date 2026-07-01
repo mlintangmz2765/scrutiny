@@ -12,6 +12,7 @@ export const PROTECTED_FILES = [
   'CLAUDE.md',
   'docs/PLAN.md',
   'docs/PLAN-V2.md',
+  'docs/DOMAIN-V2.md',
   'docs/DOMAIN.md',
   'docs/ARCHITECTURE.md',
   'docs/DESIGN.md',

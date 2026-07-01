@@ -1,6 +1,6 @@
 {
   "comment": "Integrity manifest for plan and guard files. Regenerate ONLY for human-approved plan changes via \"node scripts/guard/update-plan-manifest.mjs\" and commit with [plan-change].",
-  "generatedAt": "2026-06-12T12:01:17.309Z",
+  "generatedAt": "2026-07-01T22:54:36.088Z",
   "checksums": {
     ".claude/settings.json": "405582f1ebf1ddcf14cde68d63c366c093128b1347ae9b8cb8411afcd87518ef",
     ".github/workflows/ci.yml": "212aa8aee603fde0fac34203293e5e79e8508034d31c89fa16c40a8ba6ee68de",
@@ -10,9 +10,10 @@
     "CLAUDE.md": "f232a5d5cda6929852d34d755e932e5b5d224083c3422075627d8a32901bf808",
     "docs/ARCHITECTURE.md": "12d30d6ea77a19d80058a7431b1dea4838f9268a138f445f2ad45ddebb9e47a1",
     "docs/DESIGN.md": "5483504da8875162cfdc91ad0a7c25588af79f1af1acca3b993180596e933503",
+    "docs/DOMAIN-V2.md": "d0fa0a0a3a6b419dd4a7d8976feb107f5566b9e5580ec66afa49deae87df7ef0",
     "docs/DOMAIN.md": "cd1d71a3b70e856f911a558ddd20febcda78184e16f629050e5fa4c64eefeba3",
-    "docs/PLAN-V2.md": "199d3f7909c5be91e9e91e407840d7af9204f477007908bfd9eee8817b59b43d",
-    "docs/PLAN.md": "c138deec89ede805fdf2400a50fb6d8d617c328dfec0ef079d940608ecba1bbe",
+    "docs/PLAN-V2.md": "ccf6fa05a481f48bd3990b98a55df54eaa914007e162f5b1de37ffd993d5aa55",
+    "docs/PLAN.md": "093f6fcb2d86992cf99a6f282fb00c966564b28fab870b1d9c2b24ddf4f8c785",
     "docs/phases/PHASE-00-foundation.md": "ceb3eadcf7b47644e865d72ca42b3fc680afe7364ca2bbe85388ae8592da8899",
     "docs/phases/PHASE-01-auth-and-engagements.md": "56a9f4f9717edfc25a237d8ce6bdb9fdd3af0036043d23d9281f75413dbf4103",
     "docs/phases/PHASE-02-trial-balance.md": "d17a6f213fbebb6c1db8fadb61498bdeed1c1dce94065df24d3ecdf40dde2ff2",
@@ -23,6 +24,16 @@
     "docs/phases/PHASE-07-working-papers.md": "9ae1743e33ccbd54594982bda9406e1a1a683633cea93429b90208fe9bfc8c91",
     "docs/phases/PHASE-08-misstatements-and-reporting.md": "ebde9e8c4e73b53fbf34a9a821b9828f4a3c18fda302461b4df02da30a34219b",
     "docs/phases/PHASE-09-packaging-and-rollforward.md": "8f753e62f670fd7e63a6ef97cca59f47b6652e8ee00d0a77271b82960eb5acaf",
+    "docs/phases/PHASE-10-scale-and-security.md": "dc09bd06f033160291628f081fa822f2c80e3471b3f5bf725e042fba47a468ce",
+    "docs/phases/PHASE-11-methodology-engine.md": "2935c93ec4f3d456c38313b7120be10dc9c009248d6a016bc0d4032e17b575ee",
+    "docs/phases/PHASE-12-client-portal.md": "632242d319b3635e8c832798bed0aa746f1f07e2b332bfe8b6e9907876850c23",
+    "docs/phases/PHASE-13-confirmations.md": "b7e2bd34a1accd3a787656fd62750b793c4045483fc180aa83a676cdaf0a0cb8",
+    "docs/phases/PHASE-14-data-analytics-at-scale.md": "70304d9882983abb99a3b80f62343d31ee7e043cef7495ae9f560fe3d0ff8f00",
+    "docs/phases/PHASE-15-financial-statement-suite.md": "e47342579f5d206ed36f368090a4f8aad3d1110aaccb44e0b63259154cb61edf",
+    "docs/phases/PHASE-16-group-audits-and-multicurrency.md": "17187135719bd668f27e6b80bc832e71593e6d47cbc42f4ae22046e2f02881c3",
+    "docs/phases/PHASE-17-quality-management.md": "2774c58b43c3bde49f0529f368f5153aefe9fe650b26e3eccbe1af67b61d7e9b",
+    "docs/phases/PHASE-18-practice-management.md": "75cb73816b24174ffa8e4ecac324839aa99ff9e3663eb2117038517452c6de55",
+    "docs/phases/PHASE-19-ai-assistance.md": "3932a1bebc252748100dc74ddb7ece5f0c318e428713f59df5e1ddb998bd57fd",
     "eslint.config.js": "79672e74a5465c49220aeecfada3d68ecf3708baedc0c7698dd33f1189549798",
     "scripts/guard/check-commit-msg.mjs": "214d4d9ce6c8f056ab0ba723c99d2b0e00590a4bb7fe3087520ca2f790e93e73",
     "scripts/guard/check-repo.mjs": "73ae9ef6efd1cafba30975c325f9f26247b2414766c0f04bb1c5b5f85015581e",
@@ -32,7 +43,7 @@
     "scripts/guard/git.mjs": "adc9818fe71661dd226d5a0ba8173c269d59fcd85ac27820859ba212c1d1ba15",
     "scripts/guard/patterns.mjs": "9a8d3d64db6ed7fd394abc1b45b0517df3a8627183d2ab414fb3307131168f99",
     "scripts/guard/progress.mjs": "86f621f5e30bb870e4ec69995d04b321376e942b017898bdf214d36c7b1205ad",
-    "scripts/guard/protected.mjs": "e9935225f0bfbb99af9e0624915d7dbe4f7cd98ec72736e805e64418eaba76fe",
+    "scripts/guard/protected.mjs": "7aab7a0faf2c70b67baf78c4abebaeeee4cd0628a86c0ae3ba7551afc568795f",
     "scripts/guard/run.mjs": "0038d6c1fcd7799b418220bfc29001ab4f50940518f1f979676370af50f93e15",
     "scripts/guard/update-plan-manifest.mjs": "f48e869814f0d5ec577d46c090d69b11d4fa7f5a39881b8520b1c85fa55d4fd1",
     "tsconfig.base.json": "1e51815590a74e957cdd28e362f78c01f88b331aae5966740a447095c3145878"
@@ -326,6 +337,368 @@
     "T-09.5": {
       "prereqs": [
         "T-09.4"
+      ]
+    },
+    "T-10.1": {
+      "prereqs": [
+        "T-09.5"
+      ]
+    },
+    "T-10.2": {
+      "prereqs": [
+        "T-10.1"
+      ]
+    },
+    "T-10.3": {
+      "prereqs": [
+        "T-10.2"
+      ]
+    },
+    "T-10.4": {
+      "prereqs": [
+        "T-10.3"
+      ]
+    },
+    "T-10.5": {
+      "prereqs": [
+        "T-10.4"
+      ]
+    },
+    "T-10.6": {
+      "prereqs": [
+        "T-10.5"
+      ]
+    },
+    "T-10.7": {
+      "prereqs": [
+        "T-10.6"
+      ]
+    },
+    "T-10.8": {
+      "prereqs": [
+        "T-10.7"
+      ]
+    },
+    "T-11.1": {
+      "prereqs": [
+        "T-10.8"
+      ]
+    },
+    "T-11.2": {
+      "prereqs": [
+        "T-11.1"
+      ]
+    },
+    "T-11.3": {
+      "prereqs": [
+        "T-11.2"
+      ]
+    },
+    "T-11.4": {
+      "prereqs": [
+        "T-11.3"
+      ]
+    },
+    "T-11.5": {
+      "prereqs": [
+        "T-11.4"
+      ]
+    },
+    "T-11.6": {
+      "prereqs": [
+        "T-11.5"
+      ]
+    },
+    "T-11.7": {
+      "prereqs": [
+        "T-11.6"
+      ]
+    },
+    "T-11.8": {
+      "prereqs": [
+        "T-11.7"
+      ]
+    },
+    "T-12.1": {
+      "prereqs": [
+        "T-10.8"
+      ]
+    },
+    "T-12.2": {
+      "prereqs": [
+        "T-12.1"
+      ]
+    },
+    "T-12.3": {
+      "prereqs": [
+        "T-12.2"
+      ]
+    },
+    "T-12.4": {
+      "prereqs": [
+        "T-12.3"
+      ]
+    },
+    "T-12.5": {
+      "prereqs": [
+        "T-12.4"
+      ]
+    },
+    "T-12.6": {
+      "prereqs": [
+        "T-12.5"
+      ]
+    },
+    "T-13.1": {
+      "prereqs": [
+        "T-10.8"
+      ]
+    },
+    "T-13.2": {
+      "prereqs": [
+        "T-13.1"
+      ]
+    },
+    "T-13.3": {
+      "prereqs": [
+        "T-13.2"
+      ]
+    },
+    "T-13.4": {
+      "prereqs": [
+        "T-13.3"
+      ]
+    },
+    "T-13.5": {
+      "prereqs": [
+        "T-13.4"
+      ]
+    },
+    "T-14.1": {
+      "prereqs": [
+        "T-10.8"
+      ]
+    },
+    "T-14.2": {
+      "prereqs": [
+        "T-14.1"
+      ]
+    },
+    "T-14.3": {
+      "prereqs": [
+        "T-14.2"
+      ]
+    },
+    "T-14.4": {
+      "prereqs": [
+        "T-14.3"
+      ]
+    },
+    "T-14.5": {
+      "prereqs": [
+        "T-14.4"
+      ]
+    },
+    "T-14.6": {
+      "prereqs": [
+        "T-14.5"
+      ]
+    },
+    "T-14.7": {
+      "prereqs": [
+        "T-14.6"
+      ]
+    },
+    "T-14.8": {
+      "prereqs": [
+        "T-14.7"
+      ]
+    },
+    "T-14.9": {
+      "prereqs": [
+        "T-14.8"
+      ]
+    },
+    "T-14.10": {
+      "prereqs": [
+        "T-14.9"
+      ]
+    },
+    "T-15.1": {
+      "prereqs": [
+        "T-10.8"
+      ]
+    },
+    "T-15.2": {
+      "prereqs": [
+        "T-15.1"
+      ]
+    },
+    "T-15.3": {
+      "prereqs": [
+        "T-15.2"
+      ]
+    },
+    "T-15.4": {
+      "prereqs": [
+        "T-15.3"
+      ]
+    },
+    "T-15.5": {
+      "prereqs": [
+        "T-15.4"
+      ]
+    },
+    "T-15.6": {
+      "prereqs": [
+        "T-15.5"
+      ]
+    },
+    "T-15.7": {
+      "prereqs": [
+        "T-15.6"
+      ]
+    },
+    "T-16.1": {
+      "prereqs": [
+        "T-14.10",
+        "T-15.7"
+      ]
+    },
+    "T-16.2": {
+      "prereqs": [
+        "T-16.1"
+      ]
+    },
+    "T-16.3": {
+      "prereqs": [
+        "T-16.2"
+      ]
+    },
+    "T-16.4": {
+      "prereqs": [
+        "T-16.3"
+      ]
+    },
+    "T-16.5": {
+      "prereqs": [
+        "T-16.4"
+      ]
+    },
+    "T-16.6": {
+      "prereqs": [
+        "T-16.5"
+      ]
+    },
+    "T-16.7": {
+      "prereqs": [
+        "T-16.6"
+      ]
+    },
+    "T-16.8": {
+      "prereqs": [
+        "T-16.7"
+      ]
+    },
+    "T-17.1": {
+      "prereqs": [
+        "T-11.8"
+      ]
+    },
+    "T-17.2": {
+      "prereqs": [
+        "T-17.1"
+      ]
+    },
+    "T-17.3": {
+      "prereqs": [
+        "T-17.2"
+      ]
+    },
+    "T-17.4": {
+      "prereqs": [
+        "T-17.3"
+      ]
+    },
+    "T-17.5": {
+      "prereqs": [
+        "T-17.4"
+      ]
+    },
+    "T-17.6": {
+      "prereqs": [
+        "T-17.5"
+      ]
+    },
+    "T-17.7": {
+      "prereqs": [
+        "T-17.6"
+      ]
+    },
+    "T-18.1": {
+      "prereqs": [
+        "T-17.7"
+      ]
+    },
+    "T-18.2": {
+      "prereqs": [
+        "T-18.1"
+      ]
+    },
+    "T-18.3": {
+      "prereqs": [
+        "T-18.2"
+      ]
+    },
+    "T-18.4": {
+      "prereqs": [
+        "T-18.3"
+      ]
+    },
+    "T-18.5": {
+      "prereqs": [
+        "T-18.4"
+      ]
+    },
+    "T-19.1": {
+      "prereqs": [
+        "T-11.8",
+        "T-14.10"
+      ]
+    },
+    "T-19.2": {
+      "prereqs": [
+        "T-19.1"
+      ]
+    },
+    "T-19.3": {
+      "prereqs": [
+        "T-19.2"
+      ]
+    },
+    "T-19.4": {
+      "prereqs": [
+        "T-19.3"
+      ]
+    },
+    "T-19.5": {
+      "prereqs": [
+        "T-19.4"
+      ]
+    },
+    "T-19.6": {
+      "prereqs": [
+        "T-19.5"
+      ]
+    },
+    "T-19.7": {
+      "prereqs": [
+        "T-19.6"
+      ]
+    },
+    "T-19.8": {
+      "prereqs": [
+        "T-19.7"
       ]
     }
   }

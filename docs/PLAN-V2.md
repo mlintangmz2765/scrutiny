@@ -1,11 +1,11 @@
 # Scrutiny — Post-v1.0 Roadmap: Big-4 Platform Parity (v2)
 
-> Status: **approved roadmap, not yet executable.** Prerequisite: every v1.0 task in
-> [PROGRESS.md](./PROGRESS.md) is `✅ done` and v1.0 is tagged.
-> When v1.0 ships, each phase below gets a detailed task file in `docs/phases/`
-> (PHASE-10 …) through the `[plan-change]` process, and PROGRESS.md gains its tasks.
-> The execution model of [PLAN.md §3](./PLAN.md) applies unchanged — including the
-> machine-enforced guardrails.
+> Status: **execution-ready.** Every phase below has a detailed task file in
+> `docs/phases/` and its tasks sit in [PROGRESS.md](./PROGRESS.md) behind `T-09.5`,
+> so the guard’s task graph mechanically prevents starting v2 before v1.0 is done.
+> New v2 audit math lives in [DOMAIN-V2.md](./DOMAIN-V2.md) with pinned worked
+> examples. The execution model of [PLAN.md §3](./PLAN.md) applies unchanged —
+> including the machine-enforced guardrails.
 
 ---
 
@@ -44,8 +44,21 @@ five capability pillars exist today only in proprietary stacks.
 
 ## 3. Phases
 
-Sizing is indicative (task counts comparable to v1 phases). Dependencies listed per
-phase; otherwise phases may be planned in the order below.
+| Phase | Task file | Tasks | Entry prerequisite |
+|---|---|---|---|
+| 10 | [PHASE-10-scale-and-security.md](./phases/PHASE-10-scale-and-security.md) | 8 | T-09.5 |
+| 11 | [PHASE-11-methodology-engine.md](./phases/PHASE-11-methodology-engine.md) | 8 | T-10.8 |
+| 12 | [PHASE-12-client-portal.md](./phases/PHASE-12-client-portal.md) | 6 | T-10.8 |
+| 13 | [PHASE-13-confirmations.md](./phases/PHASE-13-confirmations.md) | 5 | T-10.8 |
+| 14 | [PHASE-14-data-analytics-at-scale.md](./phases/PHASE-14-data-analytics-at-scale.md) | 10 | T-10.8 |
+| 15 | [PHASE-15-financial-statement-suite.md](./phases/PHASE-15-financial-statement-suite.md) | 7 | T-10.8 |
+| 16 | [PHASE-16-group-audits-and-multicurrency.md](./phases/PHASE-16-group-audits-and-multicurrency.md) | 8 | T-14.10 + T-15.7 |
+| 17 | [PHASE-17-quality-management.md](./phases/PHASE-17-quality-management.md) | 7 | T-11.8 |
+| 18 | [PHASE-18-practice-management.md](./phases/PHASE-18-practice-management.md) | 5 | T-17.7 |
+| 19 | [PHASE-19-ai-assistance.md](./phases/PHASE-19-ai-assistance.md) | 8 | T-11.8 + T-14.10 |
+
+The prose below remains the capability narrative per phase; the task files are the
+executable specification.
 
 ### Phase 10 — Scale & security platform (depends: v1.0)
 
@@ -229,8 +242,8 @@ v3.0 after Phase 19.
 
 ## 7. Governance
 
-This document is protected by the guard like PLAN.md. Turning any phase into
-executable work requires, via the `[plan-change]` process: (1) a detailed
+This document is protected by the guard like PLAN.md. The requirements below were
+fulfilled on 2026-07-02 through the `[plan-change]` process: (1) a detailed
 `docs/phases/PHASE-NN-*.md` with tasks/acceptance in the v1 format, (2) PROGRESS.md
 rows, (3) DOMAIN.md additions for any new audit math (e.g. CTA translation, component
 materiality allocation, ISA 520 precision formulas) — pinned with worked examples

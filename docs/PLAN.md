@@ -152,7 +152,9 @@ unless the task states otherwise.
 | 9 | [PHASE-09-packaging-and-rollforward.md](./phases/PHASE-09-packaging-and-rollforward.md) | Roll-forward, Docker, backups, E2E test, v1.0 release | 8 |
 
 After v1.0: the Big-4 parity roadmap (Phases 10–19) lives in [PLAN-V2.md](./PLAN-V2.md).
-It is a roadmap, not executable work — do not start it before v1.0 is tagged.
+Phases 10–19 are fully specified as task files (PHASE-10 … PHASE-19) with their 72
+tasks queued in PROGRESS.md behind T-09.5 — the task graph mechanically prevents
+starting v2 before v1.0 completes. New v2 audit math: [DOMAIN-V2.md](./DOMAIN-V2.md).
 
 ---
 
