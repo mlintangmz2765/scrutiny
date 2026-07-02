@@ -1,6 +1,6 @@
 {
   "comment": "Integrity manifest for plan and guard files. Regenerate ONLY for human-approved plan changes via \"node scripts/guard/update-plan-manifest.mjs\" and commit with [plan-change].",
-  "generatedAt": "2026-07-01T22:54:36.088Z",
+  "generatedAt": "2026-07-02T10:08:44.936Z",
   "checksums": {
     ".claude/settings.json": "405582f1ebf1ddcf14cde68d63c366c093128b1347ae9b8cb8411afcd87518ef",
     ".github/workflows/ci.yml": "212aa8aee603fde0fac34203293e5e79e8508034d31c89fa16c40a8ba6ee68de",
@@ -13,7 +13,7 @@
     "docs/DOMAIN-V2.md": "d0fa0a0a3a6b419dd4a7d8976feb107f5566b9e5580ec66afa49deae87df7ef0",
     "docs/DOMAIN.md": "cd1d71a3b70e856f911a558ddd20febcda78184e16f629050e5fa4c64eefeba3",
     "docs/PLAN-V2.md": "ccf6fa05a481f48bd3990b98a55df54eaa914007e162f5b1de37ffd993d5aa55",
-    "docs/PLAN.md": "093f6fcb2d86992cf99a6f282fb00c966564b28fab870b1d9c2b24ddf4f8c785",
+    "docs/PLAN.md": "fe8eab9945ef076a070cc89227cf8d6ea769ec8ffefb991355a76496fe4c33ec",
     "docs/phases/PHASE-00-foundation.md": "ceb3eadcf7b47644e865d72ca42b3fc680afe7364ca2bbe85388ae8592da8899",
     "docs/phases/PHASE-01-auth-and-engagements.md": "56a9f4f9717edfc25a237d8ce6bdb9fdd3af0036043d23d9281f75413dbf4103",
     "docs/phases/PHASE-02-trial-balance.md": "d17a6f213fbebb6c1db8fadb61498bdeed1c1dce94065df24d3ecdf40dde2ff2",
@@ -23,7 +23,7 @@
     "docs/phases/PHASE-06-sampling.md": "1fd2b59fe966abc11fc161713e6561b3d382655ca481eea46caa31f734bf0a79",
     "docs/phases/PHASE-07-working-papers.md": "9ae1743e33ccbd54594982bda9406e1a1a683633cea93429b90208fe9bfc8c91",
     "docs/phases/PHASE-08-misstatements-and-reporting.md": "ebde9e8c4e73b53fbf34a9a821b9828f4a3c18fda302461b4df02da30a34219b",
-    "docs/phases/PHASE-09-packaging-and-rollforward.md": "8f753e62f670fd7e63a6ef97cca59f47b6652e8ee00d0a77271b82960eb5acaf",
+    "docs/phases/PHASE-09-packaging-and-rollforward.md": "efa88a6bdb7793c5f2695b486caea5f1453adff5c108c483ca69dd335f0814b9",
     "docs/phases/PHASE-10-scale-and-security.md": "dc09bd06f033160291628f081fa822f2c80e3471b3f5bf725e042fba47a468ce",
     "docs/phases/PHASE-11-methodology-engine.md": "2935c93ec4f3d456c38313b7120be10dc9c009248d6a016bc0d4032e17b575ee",
     "docs/phases/PHASE-12-client-portal.md": "632242d319b3635e8c832798bed0aa746f1f07e2b332bfe8b6e9907876850c23",
@@ -336,6 +336,23 @@
     },
     "T-09.5": {
       "prereqs": [
+        "T-09.4",
+        "T-09.8"
+      ]
+    },
+    "T-09.6": {
+      "prereqs": [
+        "T-09.1"
+      ]
+    },
+    "T-09.7": {
+      "prereqs": [
+        "T-09.6"
+      ]
+    },
+    "T-09.8": {
+      "prereqs": [
+        "T-09.7",
         "T-09.4"
       ]
     },

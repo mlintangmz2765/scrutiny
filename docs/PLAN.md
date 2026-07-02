@@ -29,6 +29,12 @@ financial statement audit performed under ISA-aligned standards:
 Small and mid-size audit firms and internal audit departments that cannot afford (or do not
 want) per-seat commercial licenses. Single-firm, self-hosted deployment (Docker or local).
 
+**Auditing students and university courses** are a first-class audience. The same self-hosted
+deployment ships a seeded practice company, a one-command reset so a student can retry, and a
+student workbook with a self-check answer key (Phase 9, tasks T-09.6–T-09.8). Each student runs
+their own local copy; multi-student classroom management and grading are a possible future
+phase, explicitly out of scope for v1.0.
+
 ### Non-goals for v1.0 (explicitly out of scope — do NOT build these)
 
 - Multi-currency engagements (one currency per engagement).
@@ -38,6 +44,7 @@ want) per-seat commercial licenses. Single-firm, self-hosted deployment (Docker 
 - Direct connectors to accounting systems (import is file-based: CSV/XLSX).
 - AI/LLM features.
 - Mobile apps.
+- Classroom management, grading, or LMS integration (students run individual local copies in v1).
 
 If a task seems to require one of these, the task is being misread — re-read it.
 
@@ -59,6 +66,9 @@ A user can, end to end, using only this software:
    engagement.
 10. Export adjusted TB, lead schedules, and SUM to Excel.
 11. Roll the engagement forward to fiscal year N+1.
+12. **(Teaching)** On a freshly seeded instance, a student can perform the entire workflow above
+    on a built-in practice company, verify each result (materiality, Benford, MUS, SUM) against a
+    self-check key derived from DOMAIN.md, then reset the engagement and repeat.
 
 All of this with `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` green and an
 end-to-end Playwright test covering the happy path.
@@ -149,7 +159,7 @@ unless the task states otherwise.
 | 6 | [PHASE-06-sampling.md](./phases/PHASE-06-sampling.md) | Random/systematic/MUS sampling + MUS evaluation | 5 |
 | 7 | [PHASE-07-working-papers.md](./phases/PHASE-07-working-papers.md) | Working paper binder, attachments, sign-offs, review notes | 4 |
 | 8 | [PHASE-08-misstatements-and-reporting.md](./phases/PHASE-08-misstatements-and-reporting.md) | SUM, Excel exports, draft financial statements, archive | 6, 7 |
-| 9 | [PHASE-09-packaging-and-rollforward.md](./phases/PHASE-09-packaging-and-rollforward.md) | Roll-forward, Docker, backups, E2E test, v1.0 release | 8 |
+| 9 | [PHASE-09-packaging-and-rollforward.md](./phases/PHASE-09-packaging-and-rollforward.md) | Roll-forward, Docker, backups, E2E test, practice pack + student workbook, v1.0 release | 8 |
 
 After v1.0: the Big-4 parity roadmap (Phases 10–19) lives in [PLAN-V2.md](./PLAN-V2.md).
 Phases 10–19 are fully specified as task files (PHASE-10 … PHASE-19) with their 72
@@ -172,6 +182,7 @@ starting v2 before v1.0 completes. New v2 audit math: [DOMAIN-V2.md](./DOMAIN-V2
 | Sign-offs, review notes, lockdown | Sign-off workflow + archive | 7, 8 |
 | SUM / AJE summary reports | Misstatement evaluation + Excel exports | 8 |
 | Year-end roll-forward | Roll-forward | 9 |
+| Training / classroom practice | Seeded practice company + reset + student workbook & self-check key | 9 |
 
 ---
 

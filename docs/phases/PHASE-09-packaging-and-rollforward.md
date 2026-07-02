@@ -1,7 +1,8 @@
 # Phase 9 — Roll-forward, Packaging, E2E, Release
 
 Goal: roll an engagement into the next fiscal year, ship a one-command Docker deployment,
-back up data, prove the whole happy path with Playwright, and cut v1.0.
+back up data, prove the whole happy path with Playwright, seed a built-in practice company with
+a student workbook and self-check key so auditing students can practice end to end, and cut v1.0.
 
 Read first: DOMAIN.md §12; ARCHITECTURE.md §3 (static serving note).
 
@@ -75,13 +76,81 @@ Read first: DOMAIN.md §12; ARCHITECTURE.md §3 (static serving note).
 - [ ] `pnpm test:e2e` green locally from a clean db (script resets db first).
 
 ### T-09.5 — User guide & v1.0 release
-**Prereqs:** T-09.4
+**Prereqs:** T-09.4, T-09.8
 **Files:** `docs/user-guide/*.md` (getting-started, trial-balance, planning, fieldwork,
 sampling, completion, exports — one page each, screenshots optional); `CHANGELOG.md`
 **Steps:**
 1. Write the user guide from the perspective of an auditor who has never seen the code.
 2. CHANGELOG.md v1.0.0 summarizing capabilities; bump package versions to 1.0.0; tag
    `v1.0.0`.
-3. Final pass: every PROGRESS.md task ✅; quality gate green; README accurate.
+3. Final pass: every Phase 0–9 task ✅ (Phases 10+ are the post-v1.0 roadmap); quality gate
+   green; README accurate.
 **Acceptance:**
 - [ ] Docs build none required (plain markdown); links valid; tag created.
+
+### T-09.6 — Practice company dataset & seed
+**Prereqs:** T-09.1
+**Files:** `fixtures/practice/{trial-balance.csv,general-ledger.csv,prior-year-tb.csv}`;
+`apps/server/prisma/seed-practice.ts`; Prisma `Engagement.isPractice Boolean @default(false)`
++ migration; root script `db:seed:practice`; `docs/user-guide/practice-mode.md`
+**Steps:**
+1. Build committed fixtures for a fictional company ("Meridian Trading Co."): a **balanced**
+   current-year TB, a prior-year TB, and a GL of a few thousand lines. Choose the
+   profit-before-tax benchmark so materiality equals DOMAIN.md's pinned worked example
+   **exactly** (overall 617,284 / performance 462,963 / clearly trivial 30,864) — this ties the
+   dataset to the T-09.8 self-check key. Seed the GL with the anomalies DOMAIN.md's
+   Benford / JE-testing examples expect (digit distribution reproducing MAD 0.01175 and
+   χ² 13.659; round-number, weekend, and after-hours postings) so analytics produce the
+   documented findings.
+2. Add `isPractice` to `Engagement` (migration). `seed-practice.ts` is idempotent (guard on a
+   fixed practice client name): create an instructor (PARTNER) and a student (STAFF) user with
+   clearly-labeled demo credentials, a practice client + engagement with `isPractice=true`, then
+   import the TB and GL **through the real import / GL services** (never raw inserts). Leave all
+   student work UNSTARTED — no mapping, materiality, risk, JEs, samples, or sign-offs.
+3. Wire `pnpm db:seed:practice` (separate from the production `db:seed`; never auto-runs).
+   Document what it creates and the demo logins in `practice-mode.md`.
+**Acceptance:**
+- [ ] Test: seeding into a fresh db creates a practice engagement whose TB is balanced and whose
+      GL row count exceeds the analytics minimum; re-running the seed does not duplicate; mapping,
+      materiality, risk, JEs, and samples are all empty (student work not pre-done).
+- [ ] Test: `computeMateriality` on the seeded benchmark returns DOMAIN.md's pinned values
+      exactly (locks the dataset to the answer key).
+
+### T-09.7 — Practice reset & sandbox safeguards
+**Prereqs:** T-09.6
+**Files:** `apps/server/src/modules/practice/{service.ts,routes.ts,+tests}`;
+`apps/web/src/pages/engagements/ResetPracticeDialog.tsx` + a "Practice / sandbox" badge
+**Steps:**
+1. `POST /api/engagements/:id/reset-practice` (ADMIN or engagement PARTNER): allowed **only**
+   when `isPractice=true` (else 409 `NOT_A_PRACTICE_ENGAGEMENT`). In one transaction, delete all
+   student work (FSLI mappings, JEs, materiality, risk assessments, samples, misstatements / SUM,
+   sign-offs, review notes, attachments) and re-import the pristine TB + GL, returning the
+   engagement to its just-seeded state. `archivedGuard` still applies; write an audit-log entry.
+2. Web: on a practice engagement show a visible "Practice / sandbox" badge (DESIGN.md tokens) and
+   a "Reset practice engagement" action behind a confirm dialog; hide both on non-practice
+   engagements.
+**Acceptance:**
+- [ ] Test: reset on a practice engagement clears every listed work item and restores the TB + GL
+      to seed state; reset on a non-practice engagement is rejected with
+      `NOT_A_PRACTICE_ENGAGEMENT`; an audit-log entry is written.
+
+### T-09.8 — Student workbook & self-check key
+**Prereqs:** T-09.7, T-09.4
+**Files:** `docs/user-guide/student-workbook.md`, `docs/user-guide/self-check-key.md`; README
+"For students / classroom use" section
+**Steps:**
+1. Write a student-facing workbook that walks the whole audit on the seeded practice company at a
+   learner's level. For each stage (TB import & mapping → materiality → risk → AJEs & adjusted TB
+   → ratio/variance analytics, Benford, JE testing → MUS sampling → SUM → sign-off & archive →
+   roll-forward) state **what** it is, **why** it matters (cite the governing ISA), and the exact
+   steps in the UI. Keep it self-contained (link the auditor user guide where useful, but do not
+   depend on it).
+2. Write a self-check answer key populated **only** from DOMAIN.md's pinned worked examples
+   (materiality 617,284 / 462,963 / 30,864; Benford MAD 0.01175, χ² 13.659; MUS interval 216,450,
+   n=47; projected 324,675, UML 824,675) so a student can verify each computed result. Label it
+   clearly as instructor / self-check content.
+3. Add a "For students / classroom use" section to README pointing at `practice-mode.md`,
+   `db:seed:practice`, and the workbook.
+**Acceptance:**
+- [ ] Every self-check number matches DOMAIN.md exactly (cross-checked; the domain unit tests are
+      the source of truth for those values); all markdown links resolve.

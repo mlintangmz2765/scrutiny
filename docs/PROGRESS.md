@@ -63,7 +63,10 @@ A task may only start when every prerequisite task is `✅ done`.
 | T-09.2 | Docker & static serving | T-09.1 | ⬜ todo | |
 | T-09.3 | Backups & ops docs | T-09.2 | ⬜ todo | |
 | T-09.4 | Playwright E2E happy path | T-09.3 | ⬜ todo | |
-| T-09.5 | User guide & v1.0 release | T-09.4 | ⬜ todo | |
+| T-09.5 | User guide & v1.0 release | T-09.4, T-09.8 | ⬜ todo | |
+| T-09.6 | Practice company dataset & seed | T-09.1 | ⬜ todo | |
+| T-09.7 | Practice reset & sandbox safeguards | T-09.6 | ⬜ todo | |
+| T-09.8 | Student workbook & self-check key | T-09.7, T-09.4 | ⬜ todo | |
 | T-10.1 | PostgreSQL as a second provider | T-09.5 | ⬜ todo | |
 | T-10.2 | Background job runner | T-10.1 | ⬜ todo | |
 | T-10.3 | OIDC single sign-on | T-10.2 | ⬜ todo | |
