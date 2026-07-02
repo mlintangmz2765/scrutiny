@@ -51,6 +51,9 @@ model Engagement {
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
   members            EngagementMember[]
+  accounts           Account[]
+  tbImports          TrialBalanceImport[]
+  accountMappings    AccountMapping[]
 
   @@index([clientId])
 }
@@ -79,4 +82,80 @@ model User {
   updatedAt    DateTime @updatedAt
 
   engagementMemberships EngagementMember[]
+  trialBalanceImports   TrialBalanceImport[]
+}
+
+// Standard FSLI taxonomy (DOMAIN.md §2). Global, seeded, not engagement-scoped.
+model FsliGroup {
+  id         String @id @default(cuid())
+  code       String @unique
+  name       String
+  statement  String // BS | IS
+  normalSign String // DR | CR
+  sortOrder  Int
+
+  mappings AccountMapping[]
+}
+
+// A GL account belonging to one engagement's chart of accounts.
+model Account {
+  id           String     @id @default(cuid())
+  engagementId String
+  engagement   Engagement @relation(fields: [engagementId], references: [id])
+  code         String
+  name         String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  lines   TrialBalanceLine[]
+  mapping AccountMapping?
+
+  @@unique([engagementId, code])
+  @@index([engagementId])
+}
+
+// One active import per (engagement, kind); re-import replaces its lines.
+model TrialBalanceImport {
+  id           String     @id @default(cuid())
+  engagementId String
+  engagement   Engagement @relation(fields: [engagementId], references: [id])
+  kind         String // CURRENT | PRIOR
+  fileName     String
+  importedById String
+  importedBy   User       @relation(fields: [importedById], references: [id])
+  importedAt   DateTime   @default(now())
+  rowCount     Int
+
+  lines TrialBalanceLine[]
+
+  @@unique([engagementId, kind])
+  @@index([engagementId])
+}
+
+model TrialBalanceLine {
+  id        String             @id @default(cuid())
+  importId  String
+  import    TrialBalanceImport @relation(fields: [importId], references: [id], onDelete: Cascade)
+  accountId String
+  account   Account            @relation(fields: [accountId], references: [id])
+  amount    BigInt // signed minor units: debit +, credit −
+
+  @@index([importId])
+  @@index([accountId])
+}
+
+// Each account maps to exactly one FSLI group within its engagement.
+model AccountMapping {
+  id           String     @id @default(cuid())
+  engagementId String
+  engagement   Engagement @relation(fields: [engagementId], references: [id])
+  accountId    String     @unique
+  account      Account    @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  fsliGroupId  String
+  fsliGroup    FsliGroup  @relation(fields: [fsliGroupId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([engagementId])
+  @@index([fsliGroupId])
 }
