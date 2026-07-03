@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft } from 'lucide-react';
-import { Link, Outlet, useOutletContext, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useOutletContext, useParams } from 'react-router-dom';
+import { cn } from '../../lib/cn';
 import type { EngagementRecord } from '@scrutiny/shared';
 import { PageHeader, Spinner, StatusChip } from '../../components/ui';
 import { ApiError, apiFetch } from '../../lib/api';
@@ -51,6 +52,29 @@ export function EngagementLayout() {
         description={`${data.clientName} · ${data.periodStart} → ${data.periodEnd} · ${data.currencyCode}`}
         actions={<StatusChip status={data.status} />}
       />
+      <nav role="tablist" className="mb-5 flex gap-1 border-b border-border">
+        {[
+          { to: `/engagements/${data.id}`, label: 'Overview', end: true },
+          { to: `/engagements/${data.id}/trial-balance`, label: 'Trial balance', end: false },
+        ].map((tab) => (
+          <NavLink
+            key={tab.to}
+            to={tab.to}
+            end={tab.end}
+            role="tab"
+            className={({ isActive }) =>
+              cn(
+                '-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors',
+                isActive
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-ink-muted hover:text-ink',
+              )
+            }
+          >
+            {tab.label}
+          </NavLink>
+        ))}
+      </nav>
       <Outlet context={{ engagement: data } satisfies EngagementContext} />
     </>
   );
