@@ -52,30 +52,51 @@ export function EngagementLayout() {
         description={`${data.clientName} · ${data.periodStart} → ${data.periodEnd} · ${data.currencyCode}`}
         actions={<StatusChip status={data.status} />}
       />
-      <nav role="tablist" className="mb-5 flex gap-1 border-b border-border">
-        {[
-          { to: `/engagements/${data.id}`, label: 'Overview', end: true },
-          { to: `/engagements/${data.id}/trial-balance`, label: 'Trial balance', end: false },
-        ].map((tab) => (
-          <NavLink
-            key={tab.to}
-            to={tab.to}
-            end={tab.end}
-            role="tab"
-            className={({ isActive }) =>
-              cn(
-                '-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors',
-                isActive
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-ink-muted hover:text-ink',
-              )
-            }
-          >
-            {tab.label}
-          </NavLink>
-        ))}
-      </nav>
+      <EngagementTabs engagementId={data.id} />
       <Outlet context={{ engagement: data } satisfies EngagementContext} />
     </>
+  );
+}
+
+function EngagementTabs({ engagementId }: { engagementId: string }) {
+  const { data: tb } = useQuery({
+    queryKey: ['engagement', engagementId, 'trial-balance'],
+    queryFn: () =>
+      apiFetch<{ unmappedAccountCount: number }>(`/engagements/${engagementId}/trial-balance`),
+  });
+  const unmapped = tb?.unmappedAccountCount ?? 0;
+
+  const tabs = [
+    { to: `/engagements/${engagementId}`, label: 'Overview', end: true, badge: 0 },
+    { to: `/engagements/${engagementId}/trial-balance`, label: 'Trial balance', end: false, badge: 0 },
+    { to: `/engagements/${engagementId}/mapping`, label: 'Mapping', end: false, badge: unmapped },
+  ];
+
+  return (
+    <nav role="tablist" className="mb-5 flex gap-1 border-b border-border">
+      {tabs.map((tab) => (
+        <NavLink
+          key={tab.to}
+          to={tab.to}
+          end={tab.end}
+          role="tab"
+          className={({ isActive }) =>
+            cn(
+              '-mb-px flex items-center gap-1.5 border-b-2 px-3 py-2 text-sm font-medium transition-colors',
+              isActive
+                ? 'border-primary text-primary'
+                : 'border-transparent text-ink-muted hover:text-ink',
+            )
+          }
+        >
+          {tab.label}
+          {tab.badge > 0 && (
+            <span className="rounded-full bg-warning-tint px-1.5 text-xs font-medium text-warning">
+              {tab.badge}
+            </span>
+          )}
+        </NavLink>
+      ))}
+    </nav>
   );
 }

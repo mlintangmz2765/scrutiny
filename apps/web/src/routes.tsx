@@ -9,6 +9,7 @@ import { EngagementCreatePage } from './pages/engagements/EngagementCreatePage';
 import { EngagementLayout } from './pages/engagements/EngagementLayout';
 import { EngagementOverviewPage } from './pages/engagements/EngagementOverviewPage';
 import { EngagementsPage } from './pages/engagements/EngagementsPage';
+import { MappingPage } from './pages/trial-balance/MappingPage';
 import { TbImportPage } from './pages/trial-balance/TbImportPage';
 
 export const router = createBrowserRouter([
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
             children: [
               { index: true, element: <EngagementOverviewPage /> },
               { path: 'trial-balance', element: <TbImportPage /> },
+              { path: 'mapping', element: <MappingPage /> },
             ],
           },
           { path: '/design', element: <DesignGalleryPage /> },

@@ -27,7 +27,7 @@ A task may only start when every prerequisite task is `✅ done`.
 | T-02.3 | Import API | T-02.2 | ✅ done | 2026-07-03 |
 | T-02.4 | Import UI | T-02.3, T-01.7 | ✅ done | 2026-07-03 |
 | T-02.5 | Mapping API + auto-suggest | T-02.3 | ✅ done | 2026-07-03 |
-| T-02.6 | Mapping UI | T-02.4, T-02.5 | ⬜ todo | |
+| T-02.6 | Mapping UI | T-02.4, T-02.5 | ✅ done | 2026-07-03 |
 | T-02.7 | TB views | T-02.6 | ⬜ todo | |
 | T-03.1 | JE models | T-02.7 | ⬜ todo | |
 | T-03.2 | JE service & API | T-03.1 | ⬜ todo | |
