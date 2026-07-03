@@ -23,7 +23,7 @@ A task may only start when every prerequisite task is `✅ done`.
 | T-01.7 | Engagements UI | T-01.5, T-01.6 | ✅ done | 2026-06-12 |
 | T-01.8 | Audit log | T-01.6 | ✅ done | 2026-06-12 |
 | T-02.1 | TB models & FSLI seed | T-01.8 | ✅ done | 2026-07-02 |
-| T-02.2 | File parsing service | T-02.1 | ⬜ todo | |
+| T-02.2 | File parsing service | T-02.1 | ✅ done | 2026-07-03 |
 | T-02.3 | Import API | T-02.2 | ⬜ todo | |
 | T-02.4 | Import UI | T-02.3, T-01.7 | ⬜ todo | |
 | T-02.5 | Mapping API + auto-suggest | T-02.3 | ⬜ todo | |

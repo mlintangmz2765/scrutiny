@@ -1,0 +1,6 @@
+Code,Name,Debit,Credit
+1000,Cash on hand,abc,
+2000,Trade payables,,1x2
+3000,Both sides posted,100000.00,50000.00
+,No account code,10000.00,
+5000,,,30000.00

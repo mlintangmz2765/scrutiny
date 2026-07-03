@@ -1,0 +1,32 @@
+Code,Name,Debit,Credit
+1000,Cash on hand,15000.00,
+1010,Bank current account,250000.00,
+1020,Petty cash,2000.00,
+1200,Trade receivables,480000.00,
+1300,Other receivables,35000.00,
+1400,Inventory,320000.00,
+1500,Prepaid expenses,22000.00,
+1600,Property plant and equipment,1200000.00,
+1650,Accumulated depreciation,,300000.00
+1700,Intangible assets,90000.00,
+1800,Long-term investments,150000.00,
+2000,Trade payables,,210000.00
+2100,Accrued liabilities,,45000.00
+2200,Short-term borrowings,,100000.00
+2300,Long-term borrowings,,400000.00
+2400,Tax payable,,60000.00
+2500,Other liabilities,,25000.00
+3000,Share capital,,500000.00
+3100,Retained earnings,,587000.00
+3200,Other equity,,20000.00
+4000,Revenue,,2400000.00
+4100,Other income,,40000.00
+5000,Cost of sales,1350000.00,
+6000,Salaries expense,380000.00,
+6100,Rent expense,90000.00,
+6200,Utilities expense,30000.00,
+6300,Office expense,25000.00,
+6400,Marketing expense,28000.00,
+7000,Depreciation and amortization,120000.00,
+7500,Finance costs,35000.00,
+8000,Income tax expense,65000.00,

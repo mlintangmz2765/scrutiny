@@ -1,0 +1,5 @@
+Code,Name,Debit,Credit
+1000,Cash on hand,100000.00,
+1200,Trade receivables,50000.00,
+2000,Trade payables,,90000.00
+3000,Share capital,,50000.00

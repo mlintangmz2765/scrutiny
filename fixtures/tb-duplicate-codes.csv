@@ -1,0 +1,4 @@
+Code,Name,Debit,Credit
+1000,Cash on hand,100000.00,
+2000,Trade payables,,60000.00
+1000,Cash duplicated,40000.00,
