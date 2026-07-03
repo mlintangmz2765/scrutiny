@@ -2,6 +2,7 @@ import multipart from '@fastify/multipart';
 import type { FastifyPluginAsync, FastifyRequest } from 'fastify';
 import { tbColumnMapSchema, tbImportKindSchema, type TbColumnMap, type TbImportKind } from '@scrutiny/shared';
 import { AppError } from '../../lib/app-error.js';
+import { getTbReport, getTbSummary } from './report-service.js';
 import { getTrialBalanceOverview, importTrialBalance, previewTrialBalance } from './service.js';
 
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
@@ -57,5 +58,15 @@ export const trialBalanceRoutes: FastifyPluginAsync = async (app) => {
   app.get('/engagements/:engagementId/trial-balance', async (req) => {
     const { engagementId } = req.params as { engagementId: string };
     return getTrialBalanceOverview(app.prisma, req.user, engagementId);
+  });
+
+  app.get('/engagements/:engagementId/trial-balance/report', async (req) => {
+    const { engagementId } = req.params as { engagementId: string };
+    return getTbReport(app.prisma, req.user, engagementId);
+  });
+
+  app.get('/engagements/:engagementId/trial-balance/summary', async (req) => {
+    const { engagementId } = req.params as { engagementId: string };
+    return getTbSummary(app.prisma, req.user, engagementId);
   });
 };

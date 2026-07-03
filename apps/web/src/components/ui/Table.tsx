@@ -50,15 +50,18 @@ export function TH({
 
 export function TD({
   numeric,
+  colSpan,
   className,
   children,
 }: {
   numeric?: boolean;
+  colSpan?: number;
   className?: string;
   children?: ReactNode;
 }) {
   return (
     <td
+      colSpan={colSpan}
       className={cn('px-3 py-2 align-middle text-ink', numeric && 'tnum text-right', className)}
     >
       {children}

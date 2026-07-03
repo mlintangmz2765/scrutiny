@@ -70,6 +70,7 @@ function EngagementTabs({ engagementId }: { engagementId: string }) {
     { to: `/engagements/${engagementId}`, label: 'Overview', end: true, badge: 0 },
     { to: `/engagements/${engagementId}/trial-balance`, label: 'Trial balance', end: false, badge: 0 },
     { to: `/engagements/${engagementId}/mapping`, label: 'Mapping', end: false, badge: unmapped },
+    { to: `/engagements/${engagementId}/tb-report`, label: 'TB views', end: false, badge: 0 },
   ];
 
   return (

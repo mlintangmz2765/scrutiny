@@ -11,6 +11,7 @@ import { EngagementOverviewPage } from './pages/engagements/EngagementOverviewPa
 import { EngagementsPage } from './pages/engagements/EngagementsPage';
 import { MappingPage } from './pages/trial-balance/MappingPage';
 import { TbImportPage } from './pages/trial-balance/TbImportPage';
+import { TbReportPage } from './pages/trial-balance/TbReportPage';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
               { index: true, element: <EngagementOverviewPage /> },
               { path: 'trial-balance', element: <TbImportPage /> },
               { path: 'mapping', element: <MappingPage /> },
+              { path: 'tb-report', element: <TbReportPage /> },
             ],
           },
           { path: '/design', element: <DesignGalleryPage /> },
