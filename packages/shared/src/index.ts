@@ -1,3 +1,4 @@
+export * from './domain/mapping-suggest.js';
 export * from './domain/money.js';
 export * from './schemas/auth.js';
 export * from './schemas/client.js';

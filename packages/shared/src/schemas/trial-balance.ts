@@ -75,6 +75,23 @@ export const FSLI_GROUPS: readonly FsliGroupSeed[] = [
   { code: 'X.5', name: 'Income tax expense', statement: 'IS', normalSign: 'DR' },
 ];
 
+/** Bulk mapping save: PUT /api/engagements/:id/mappings (T-02.5). */
+export const mappingsUpdateSchema = z
+  .array(z.object({ accountId: z.string().min(1), fsliGroupId: z.string().min(1) }))
+  .min(1);
+export type MappingsUpdateInput = z.infer<typeof mappingsUpdateSchema>;
+
+/** One row of GET /api/engagements/:id/mappings. */
+export interface AccountMappingRow {
+  accountId: string;
+  accountCode: string;
+  accountName: string;
+  /** Signed minor units from the CURRENT import; null when absent from it. */
+  currentAmount: number | null;
+  fsliGroupId: string | null;
+  suggestedFsliCode: string | null;
+}
+
 /** Shape of an FSLI group as returned by the API. */
 export interface FsliGroupRecord {
   id: string;
