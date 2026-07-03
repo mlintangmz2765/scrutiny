@@ -1,22 +1,8 @@
-import { assertSafeAmount, roundHalfAwayFromZero } from '@scrutiny/shared';
+import { assertSafeAmount, roundHalfAwayFromZero, type TbColumnMap } from '@scrutiny/shared';
 import { parse as parseCsv } from 'csv-parse/sync';
 import ExcelJS from 'exceljs';
 
-/**
- * How the source columns map onto trial-balance fields. Either a single signed
- * `balance` column, or separate positive-magnitude `debit` + `credit` columns.
- * The decimal separator is explicit — the parser never guesses (DOMAIN.md §2).
- */
-export interface TbColumnMap {
-  accountCode: string;
-  accountName: string;
-  balance?: string;
-  debit?: string;
-  credit?: string;
-  decimalSeparator: '.' | ',';
-  /** CSV field delimiter; ignored for XLSX. Defaults to ",". */
-  delimiter?: ',' | ';';
-}
+export type { TbColumnMap };
 
 export interface ParsedRow {
   /** 1-based data row (header excluded). */

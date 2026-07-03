@@ -12,6 +12,26 @@ export type NormalSign = z.infer<typeof normalSignSchema>;
 export const tbImportKindSchema = z.enum(['CURRENT', 'PRIOR']);
 export type TbImportKind = z.infer<typeof tbImportKindSchema>;
 
+/**
+ * How source-file columns map onto trial-balance fields: either one signed
+ * `balance` column, or separate positive-magnitude `debit` + `credit` columns.
+ * The decimal separator is explicit — the parser never guesses (DOMAIN.md §2).
+ */
+export const tbColumnMapSchema = z
+  .object({
+    accountCode: z.string().min(1),
+    accountName: z.string().min(1),
+    balance: z.string().min(1).optional(),
+    debit: z.string().min(1).optional(),
+    credit: z.string().min(1).optional(),
+    decimalSeparator: z.enum(['.', ',']),
+    delimiter: z.enum([',', ';']).optional(),
+  })
+  .refine((m) => m.balance !== undefined || (m.debit !== undefined && m.credit !== undefined), {
+    message: 'columnMap must define either "balance" or both "debit" and "credit".',
+  });
+export type TbColumnMap = z.infer<typeof tbColumnMapSchema>;
+
 export interface FsliGroupSeed {
   code: string;
   name: string;
